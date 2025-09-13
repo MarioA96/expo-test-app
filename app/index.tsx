@@ -1,4 +1,6 @@
 import { StyleSheet, Text, View, Image } from 'react-native';
+import { Link } from 'expo-router';
+
 import Logo from '../assets/image/expo-go_logo.png';
 
 
@@ -7,18 +9,14 @@ const Home = () => {
         <View style={ styles.container }>
             <Image source={Logo} style={styles.img} />
 
-            <Text style={ [styles.title, {color: 'purple'}] }>The number one</Text>
+            <Text style={ styles.title }>The number one</Text>
             
-            <Text style={{ 
-                marginTop: 10, 
-                marginBottom: 30 
-            }}>
+            <Text style={{ marginTop: 10, marginBottom: 30 }}>
                 Reading list app
             </Text>
 
-            {/* <View style={styles.card}>
-                <Text>Hello, this is a card</Text>
-            </View> */}
+            <Link href="/about" style={styles.link}>About Page</Link>
+            <Link href="/contact" style={styles.link}>Contact Page</Link>
         </View>
     )
 }
@@ -36,15 +34,10 @@ const styles = StyleSheet.create({
         fontSize: 18
     },
     img: {
-        marginVertical: 20,
-        width: '20%',
-        height: '10%'
+        marginVertical: 20
     },
-})
-
-// card: {
-//     backgroundColor: '#eee',
-//     padding: 20,
-//     borderRadius: 5,
-//     boxShadow: "4px 4px rgba(0,0,0,0.15)",
-// }
+    link: {
+        marginVertical: 10,
+        borderBottomWidth: 1
+    }
+});
