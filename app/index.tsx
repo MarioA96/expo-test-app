@@ -20,7 +20,7 @@ const Home = () => {
             </ThemedText>
             
             <Spacer height={10}/>
-            <ThemedText>Reading list app</ThemedText>
+                <ThemedText>Reading list app</ThemedText>
             <Spacer />
 
             <Link href="/login" style={styles.link}>
@@ -31,6 +31,11 @@ const Home = () => {
             <Link href="/register" style={styles.link}>
                 <ThemedText>
                     Register Page
+                </ThemedText>
+            </Link>
+            <Link href="/profile" style={styles.link}>
+                <ThemedText>
+                    Profile Page
                 </ThemedText>
             </Link>
         </ThemedView>
