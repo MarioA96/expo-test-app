@@ -1,16 +1,18 @@
+import { useUser } from "../../hooks/useUser";
+
 import { Stack } from "expo-router";
-import { StyleSheet, useColorScheme } from "react-native";
-import { Colors } from "../../constants/Colors";
 import { StatusBar } from "expo-status-bar";
 
-export default function AuthLayout(){
-    
+export default function AuthLayout() {
 
-    return  (
+    const { user } = useUser();
+    console.log(user);
+
+    return (
         <>
             <StatusBar style="auto" />
-            <Stack 
-                screenOptions={{ headerShown: false, animation: "none"}}
+            <Stack
+                screenOptions={{ headerShown: false, animation: "none" }}
             />
         </>
     )
