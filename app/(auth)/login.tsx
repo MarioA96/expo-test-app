@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useUser } from '../../hooks/useUser';
 
 import { Keyboard, StyleSheet, Text, TouchableWithoutFeedback } from 'react-native';
 import { Link } from 'expo-router';
@@ -15,9 +16,18 @@ const Login = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
 
-    const handleSubmit = () => {
-        console.log("Login for submit: ", email, password);
+    const { login } = useUser();
+
+    const handleSubmit = async () => {
+        setError(null);
+
+        try {
+            await login(email, password);
+        } catch (error) {
+            setError(error.message);
+        }
     }
 
     return (
@@ -29,14 +39,14 @@ const Login = () => {
                     Login to your account
                 </ThemedText>
 
-                <ThemedTextInput 
+                <ThemedTextInput
                     style={{ width: '80%', marginBottom: 20 }}
                     placeholder='Email'
                     keyboardType='email-address'
                     onChangeText={setEmail}
                     value={email}
                 />
-                <ThemedTextInput 
+                <ThemedTextInput
                     style={{ width: '80%', marginBottom: 20 }}
                     placeholder='Password'
                     onChangeText={setPassword}
@@ -45,10 +55,15 @@ const Login = () => {
                 />
 
                 <ThemedButton onPress={handleSubmit}>
-                    <Text style={{color: '#f2f2f2'}}>Login</Text>
+                    <Text style={{ color: '#f2f2f2' }}>Login</Text>
                 </ThemedButton>
 
-                <Spacer height={100}/>
+                <Spacer />
+                {
+                    error && <Text style={styles.error}> {error} </Text>
+                }
+
+                <Spacer height={100} />
 
                 <Link href='/register'>
                     <ThemedText style={{ textAlign: 'center' }}>
@@ -77,7 +92,7 @@ const styles = StyleSheet.create({
         marginBottom: 30
     },
 
-    btn : {
+    btn: {
         backgroundColor: Colors.primary,
         padding: 15,
         borderRadius: 5,
@@ -85,5 +100,15 @@ const styles = StyleSheet.create({
 
     pressed: {
         opacity: 0.8
+    },
+
+    error: {
+        color: Colors.warning,
+        padding: 10,
+        backgroundColor: '#f5c1c8',
+        borderColor: Colors.warning,
+        borderWidth: 1,
+        borderRadius: 6,
+        marginHorizontal: 10
     }
 })
